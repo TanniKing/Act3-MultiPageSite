@@ -6,7 +6,8 @@ Objective: Improve an existing React application by implementing routing, enhanc
 # Prerequisites
 - Basic knowledge of React and JavaScript.
 - Node.js and npm installed on your machine.
-- Materials Needed
+
+# Materials Needed
 - A code editor (e.g., VSCode).
 - Access to a terminal or command prompt.
 - Existing React project setup.
