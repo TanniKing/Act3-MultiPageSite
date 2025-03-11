@@ -1,38 +1,42 @@
-import '../App.css'
+import { useNavigate, useParams } from "react-router-dom"
+import {getDoc, doc} from 'firebase/firestore';
+import {db} from '../firebase/config'
+import { useEffect,useState } from 'react';
 
-import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+export default function Article() {
+  const { urlId } = useParams()
+  const navigate = useNavigate()
 
-const generateSlug = (title) => {
-  return title.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
-};
+  console.log("id: " + urlId)
 
-export default function Article({ articles }) {
-  const { urlId } = useParams();
-  const navigate = useNavigate();
-
-  // Find the article by slug instead of ID
-  const article = articles.find((a) => generateSlug(a.title) === urlId);
+  const [article, setArticle] = useState(null);
 
   useEffect(() => {
-    if (!article) {
-      setTimeout(() => {
-        navigate("/");
-      }, 2000);
-    }
-  }, [article, navigate]);
+    const ref = doc(db, 'articles', urlId);
+    getDoc(ref)
+      .then((snapshot)=>{        
+        setArticle(snapshot.data());
+      })
+
+  },[])  
+  
+
+  // if (!article) {
+  //   setTimeout(() => {
+  //     navigate('/')
+  //   }, 2000)
+  // }
 
   return (
     <div>
-      {!article && <p>No records found! Redirecting...</p>}
+      {!article && <p>No records found!</p>}
       {article && (
         <div key={article.id}>
           <h2>{article.title}</h2>
           <p>By {article.author}</p>
-          {/* to render html tags like <strong> and <br> */}
-          <p dangerouslySetInnerHTML={{ __html: article.body }}></p>
+          <p>{article.description}</p>
         </div>
       )}
     </div>
-  );
+  )
 }

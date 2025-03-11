@@ -29,7 +29,7 @@ export default function Contact() {
 
   return (
     <div>
-      <h2>Hey {name || "there"}, Contact Us</h2>
+      <h2>Hey, Contact Us</h2>
       <p>If you need assistance, feel free to reach out.</p>
       <ul>
         <li><strong>Email:</strong> {contactInfo.email}</li>

@@ -1,40 +1,69 @@
+/* Modernized App.css */
+
+/* 
+  1) Root Variables: 
+     Allows quick theme changes by adjusting these values. 
+*/
+:root {
+  --primary-color: #333;
+  --accent-color: #007BFF;
+  --bg-color: #f2f2f2;
+  --font-family: 'Arial', sans-serif;
+  --max-width: 1200px;
+  --base-padding: 16px;
+}
+
 /* Global Styles */
 body {
-  background-color: #f2f2f2; /* Light gray background */
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
+  font-family: var(--font-family);
+  background-color: var(--bg-color);
 }
 
-/* Container styling */
+/* Main Container */
 .App {
-  max-width: 960px;
+  max-width: var(--max-width);
   margin: 0 auto;
   min-height: 100vh;
-  background-color: #f2f2f2; /* Ensures the App container matches the global background */
+  padding: var(--base-padding);
+  background-color: var(--bg-color);
+  box-sizing: border-box;
 }
 
-/* Existing Navigation (if used elsewhere) */
-nav {
+/* Header / Navbar */
+header {
+  margin-bottom: 2rem; /* Spacing below header */
+}
+
+.navbar {
   display: flex;
-  margin: 0 auto 60px;
-  gap: 10px;
   align-items: center;
+  gap: 1rem;
 }
-nav h1 {
+
+.navbar h1 {
   margin-right: auto;
+  font-size: 1.8rem;
+  color: var(--primary-color);
 }
-nav a {
-  padding: 4px 10px;
-}
-nav a.active {
-  background: #333;
+
+.navbar a {
+  padding: 0.5rem 0.75rem;
+  color: var(--primary-color);
   text-decoration: none;
+  transition: background 0.3s, color 0.3s;
+}
+
+.navbar a:hover {
+  background-color: rgba(92, 86, 86, 0.05);
+  color: var(--accent-color);
 }
 
 .active-link {
   font-weight: bold;
-  color: blue;
+  background-color: rgba(0, 0, 0, 0.05);
+  color: var(--accent-color);
 }
 
 /* Dropdown container */
@@ -45,21 +74,30 @@ nav a.active {
 
 /* Dropdown button */
 .dropbtn {
-  padding: 10px;
+  padding: 0.5rem 0.75rem;
   border: none;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 1rem;
+  background: none;
+  color: var(--primary-color);
+  transition: color 0.3s;
+}
+
+.dropbtn:hover {
+  color: var(--accent-color);
 }
 
 /* Dropdown content (hidden by default) */
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #444;
+  top: 2.2rem; /* Positions the menu just below the button */
+  left: 0;
+  background-color: var(--primary-color);
   min-width: 120px;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-  z-index: 1;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
 }
 
 /* Dropdown buttons */
@@ -67,14 +105,36 @@ nav a.active {
   width: 100%;
   background: none;
   border: none;
-  color: white;
-  padding: 10px;
+  color: #fff;
+  padding: 0.75rem;
   text-align: left;
   cursor: pointer;
   transition: background 0.3s;
 }
 
-/* Show dropdown on hover */
-.dropdown:hover .dropdown-content {
+.dropdown-content button:hover {
+  background-color: #555;
+}
+
+/* Keep dropdown open when hovering over the content itself */
+.dropdown:hover .dropdown-content,
+.dropdown-content:hover {
   display: block;
+}
+
+/* Additional Utility Classes (optional) */
+.hidden {
+  display: none !important;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mt-2 {
+  margin-top: 2rem;
+}
+
+.mb-2 {
+  margin-bottom: 2rem;
 }
